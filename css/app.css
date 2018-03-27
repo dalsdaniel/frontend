@@ -1,0 +1,134 @@
+body, html{
+	color: #212121;
+	font: 400 16px/24px sans-serif;
+	margin: 0;
+	background-color: #f7f7f7;
+	overflow-x: hidden;
+}
+
+#bodyCarrito{
+	margin-top: 20px;
+}
+
+#bodyIndex{
+	margin-top: 20px;
+}
+
+label{
+	font-size: 16px !important;
+}
+
+.navbar {
+	margin: 0px;
+	padding: 0px;
+	position: fixed;
+	background-color: #fff;
+	border-bottom: 0.5px solid #9e9e9ea6;
+	top: 0;
+	width: 100%;
+	z-index: 10005;
+}
+
+.fullWidth{
+	width: 100% !important;
+}
+
+.logo{
+	font-size: 20px;
+}
+
+.pagecontent{
+	display: table-row;
+}
+
+.content{
+	display: flex;
+	height: 48px;
+	padding: 0 24px;
+	position: relative;
+}
+
+.row-content{
+	position: relative;
+	margin-top: 12px;
+}
+
+.aling-left{
+	text-align: left !important;
+}
+
+.aling-right{
+	text-align: right !important;
+}
+
+.sidenavbar{
+	background-color: #263238;
+	color: #fff;
+	position: relative;
+	width: 100%;
+	display: none;
+	height: 100vh;
+	z-index: 99;
+}
+
+.fullheight{
+	height: 100vh;
+}
+
+@media (min-width: 769px) {
+	.sidenavbar {
+		display: table-cell;
+		vertical-align: top;
+		width: 260px;
+	}
+}
+
+.main{
+	width: 100%;
+}
+
+@media (min-width: 769px){
+	.main {
+		display: table-cell;
+		vertical-align: top;
+	}
+}
+.maincontent{
+	padding: 20px 20px 60px 20px;
+	display: table-cell;
+	vertical-align: top;
+}
+
+.marginModal{
+	margin: 13px !important;
+}
+
+.labelModal{
+	font-size: 45px !important;
+	color: #fff !important;
+}
+.iconModal{
+	font-size: 7rem !important;
+	color: #fff;
+}
+.badgeCarrito{
+	border-radius: 12px;
+	position: relative;
+	top: -25px;
+}
+
+.padSubLevel{
+	padding-left: 50px !important;
+}
+
+.padSubLevelTwo{
+	padding-left: 70px !important;
+}
+
+.padSubLevelThree{
+	padding-left: 90px !important;
+}
+
+.paddingBottom{
+	padding-bottom: 10px !important;
+}

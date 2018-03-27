@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>El baratón</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/app.css">
+	<link rel="stylesheet" type="text/css" href="../css/materialize.css">
+</head>
+
+<body>
+
+
+	<div id="app">
+		<div class=" ">
+			<nav class="nav-extended blue-grey">
+				<div class="nav-wrapper blue-grey">
+					<a href="#!" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+					<ul>
+						<li><span class="logo"><a href="index.html">El baratón</a></span></li>
+					</ul>
+
+					<ul class="right">
+						<li>
+							<a href="carrito.html" class="aling-right">
+								<i class="material-icons">shopping_cart</i>
+							</a>
+						</li>
+					</ul>
+
+				</div>
+				<div class="nav-content">
+					<ul class="tabs tabs-transparent " >
+						<li class="tab"><a href="#todos">Todos los productos</a></li>
+						<li class="tab"><a href="#bebidas">Bebidas</a></li>
+						<li class="tab"><a href="#desayunos">Desayunos</a></li>
+						<li class="tab"><a href="#almuerzos">Almuerzos</a></li>
+						<li class="tab"><a href="#vinos">Vinos</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+
+		<ul id="slide-out" class="sidenav">
+			<ul>
+				<li v-for="categoria in categorias">
+					<a v-if="categoria.name == 'Bebidas'" class="waves-effect waves-light blue-grey white-text" v-on:click="getProductsBebidas()">{{ categoria.name }}</a>
+					<a v-if="categoria.name == 'Desayunos'" class="waves-effect waves-light blue-grey white-text" v-on:click="getProductsDesayunos()">{{ categoria.name }}</a>
+					<a v-if="categoria.name == 'Almuerzos'" class="waves-effect waves-light blue-grey white-text" v-on:click="getProductsAlmuerzos()">{{ categoria.name }}</a>
+					<a v-if="categoria.name == 'Vinos'" class="waves-effect waves-light blue-grey white-text" v-on:click="getProductsVinos()">{{ categoria.name }}</a>
+					<ul >
+						<li v-for="sublevels in categoria.sublevels">
+							<a v-if="sublevels.name == 'Gaseosas'" class=" waves-effect waves-grey padSubLevel" v-on:click="getProductsBebidas()">{{ sublevels.name }}</a>
+							<a v-if="sublevels.name == 'Desayunos'" class=" waves-effect waves-grey padSubLevel" v-on:click="getProductsDesayunos()">{{ sublevels.name }}</a>
+							<a v-if="sublevels.name == 'Fake 5'" class=" waves-effect waves-grey padSubLevel" v-on:click="todosf5()">{{ sublevels.name }}</a>
+							<a v-if="sublevels.name == 'Fake 6'" class=" waves-effect waves-grey padSubLevel" v-on:click="todosf6()">{{ sublevels.name }}</a>
+							<a v-if="sublevels.name == 'Fake 8'" class=" waves-effect waves-grey padSubLevel" v-on:click="todosf8()">{{ sublevels.name }}</a>
+							<a v-if="sublevels.name == 'Fake 9'" class=" waves-effect waves-grey padSubLevel" v-on:click="todosf9()">{{ sublevels.name }}</a>
+							<ul >
+								<li v-for="(sublevelstwo, index) in sublevels.sublevels">
+									<a v-if="sublevelstwo.name == 'Con azúcar'" class=" waves-effect waves-grey padSubLevelTwo" v-on:click="geseosasCon()">{{ sublevelstwo.name }}</a>
+									<a v-if="sublevelstwo.name == 'Sin azúcar'" class=" waves-effect waves-grey padSubLevelTwo" v-on:click="gaseosasSin()">{{ sublevelstwo.name }}</a>
+									<a v-if="sublevelstwo.name == 'Fake 2'" class=" waves-effect waves-grey padSubLevelTwo" v-on:click="f1Conf2()">{{ sublevelstwo.name }}</a>
+									<a v-if="sublevelstwo.name == 'Fake 3'" class=" waves-effect waves-grey padSubLevelTwo" v-on:click="f1Conf3()">{{ sublevelstwo.name }}</a>
+									<ul >
+										<li v-for="sublevelsthree in sublevelstwo.sublevels">
+											<a v-if="sublevelsthree.name == 'Fake 4'" class=" waves-effect waves-grey padSubLevelThree" v-on:click="f1Conf3Masf4()">{{ sublevelsthree.name }}</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</ul>
+
+		<div class="row" id="bodyIndex">
+			<div class="col s12 m12 l12">
+				<div class="col s12 m12 l12">
+					<div class="card">
+						<div class="card-content">
+							<h5 class="card-title">Ordenar por</h5>
+
+							<div class="row">
+								<div class="col s4">
+									<label class="black-text">Precio</label><br>
+									<div class="switch">
+										<label>
+											Mayor a menor
+											<input type="checkbox" id="precio" v-on:click="ordernarPrecio(productos)">
+											<span class="lever"></span>
+											Menor a mayor
+										</label>
+									</div>
+								</div>
+
+								<div class="col s4">
+									<label class="black-text">Disponibilidad</label><br>
+									<div class="switch">
+										<label>
+											No disponibles
+											<input type="checkbox" id="disponibilidad" v-on:click="disponibles(productos)">
+											<span class="lever"></span>
+											Disponibles
+										</label>
+									</div>
+								</div>
+
+								<div class="col s4">
+									<label class="black-text">Cantidad</label><br>
+									<div class="switch">
+										<label>
+											Asdendente
+											<input type="checkbox" id="cantidad" v-on:click="ordenarCantidad(productos)">
+											<span class="lever"></span>
+											Descendente
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col s12 m12 l3">
+					<div class="card">
+						<div class="card-content">
+							<h5 class="card-title">Filtros</h5>
+							<div class="row">
+								<div class="col s12">
+									<label class="black-text">
+										<input type="checkbox" class="filled-in" id="disponible" name="disponible"  value="disponible" v-on:click="showAvalibles(productos)"/>
+										<span>Disponibilidad</span>
+									</label>
+								</div>
+							</div>
+
+							<label class="black-text">Rango de precios</label>
+							<div class="row">
+								<div class="col s6">
+									<label for="desde" class="black-text">Desde</label>
+									<input placeholder="2,000" id="desde" type="number">
+								</div>
+
+								<div class="col s6">
+									<label for="hasta" class="black-text">Hasta</label>
+									<input placeholder="10,000" id="hasta" type="number">
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col s12" >
+									<a class="waves-effect waves-light btn blue-grey fullWidth" v-on:click="showRank()">Filtrar</a>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col s12">
+									<label class="black-text">
+										<input type="checkbox" id="stock" class="filled-in" v-on:click="ordernarStock(productos)"/>
+										<span>Mayor cantidad en Stock</span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="todos" class="col s12 m12 l9">
+					<div class="row">
+						<div class="input-field col s12 m12 l12">
+							<input id="buscarTodos" type="text" @keyup="buscarTodos()">
+							<label for="buscarTodos">Buscar en todos los productos</label>
+						</div>
+					</div>
+					<div v-for="producto in productos">
+						<div class="col s12 m4">
+							<div class="card white" >
+								<div class="card-image">
+									<img src="../img/imagen.jpg">
+									<h5 class="card-title">{{ producto.name }}</h5>
+								</div>
+								<div class="card-content">
+									<h6 class="aling-right red-text" v-if="producto.available == false"><i class="material-icons ">close</i><b>No disponible</b></h6>
+									<h6 class="aling-right green-text" v-else><i class="material-icons  ">check</i><b>Disponible</b></h6>
+									<h6 class="aling-right">{{ producto.quantity }} en stock</h6>
+									<h5 class="aling-right blue-grey-text">${{ producto.price }} COP</h5>
+									<div class="card-action">
+										<center>
+											<a href="#!" class="blue-grey-text" v-on:click="addProductoCarrito(producto)">Añadir al carrito</a>
+										</center>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="bebidas" class="col s12 m12 l9">
+					<div class="aling-right">
+						<div class="col s12 m12 l6 paddingBottom"><a class="waves-effect waves-light btn blue-grey waves-effect waves-light btn blue-grey fullWidth" v-on:click="geseosasCon()">Gaseosa con azúcar</a></div>
+
+						<div class="col s12 m12 l6 paddingBottom"><a class="waves-effect waves-light btn blue-grey waves-effect waves-light btn blue-grey fullWidth" v-on:click="gaseosasSin()">Gaseosa con sin azúcar</a></div>
+
+						<div class="row">
+							<div class="input-field col s12 m12 l12">
+								<input id="buscarBebidas" type="text" @keyup="buscarBebidas()">
+								<label for="buscarBebidas">Buscar bebidas</label>
+							</div>
+						</div>
+					</div>
+
+					<div v-for="producto in productos">
+						<div class="col s12 m4">
+							<div class="card white" >
+								<div class="card-image">
+									<img src="../img/imagen.jpg">
+									<h5 class="card-title">{{ producto.name }}</h5>
+								</div>
+								<div class="card-content">
+									<h6 class="aling-right red-text" v-if="producto.available == false"><i class="material-icons ">close</i><b>No disponible</b></h6>
+									<h6 class="aling-right green-text" v-else><i class="material-icons  ">check</i><b>Disponible</b></h6>
+									<h6 class="aling-right">{{ producto.quantity }} en stock</h6>
+									<h5 class="aling-right blue-grey-text">${{ producto.price }} COP</h5>
+									<div class="card-action">
+										<center>
+											<a href="#!" class="blue-grey-text" v-on:click="addProductoCarrito(producto)">Añadir al carrito</a>
+										</center>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="desayunos" class="col s12 m12 l9">
+					<div class="aling-right">
+						<div class="col s12 m12 l12 paddingBottom"><a class="waves-effect waves-light btn blue-grey fullWidth" v-on:click="f1Conf2()">Fake 1 con Fake 2</a></div>
+						<div class="col s12 m12 l12 paddingBottom"><a class="waves-effect waves-light btn blue-grey fullWidth" v-on:click="f1Conf3">Fake 1 con Fake 3</a></div>
+						<div class="col s12 m12 l12 paddingBottom"><a class="waves-effect waves-light btn blue-grey fullWidth" v-on:click="f1Conf3Masf4()">Fake 1 con Fake 3 + Fake 4</a></div>
+						<div class="row">
+							<div class="input-field col s12 m12 l12">
+								<input id="buscarDesayunos" type="text" @keyup="buscarDesayunos()">
+								<label for="buscarDesayunos">Buscar desayunos</label>
+							</div>
+						</div>
+					</div>
+					<div v-for="producto in productos">
+						<div class="col s12 m4">
+							<div class="card white" >
+								<div class="card-image">
+									<img src="../img/imagen.jpg">
+									<h5 class="card-title">{{ producto.name }}</h5>
+								</div>
+								<div class="card-content">
+									<h6 class="aling-right red-text" v-if="producto.available == false"><i class="material-icons ">close</i><b>No disponible</b></h6>
+									<h6 class="aling-right green-text" v-else><i class="material-icons  ">check</i><b>Disponible</b></h6>
+									<h6 class="aling-right">{{ producto.quantity }} en stock</h6>
+									<h5 class="aling-right blue-grey-text">${{ producto.price }} COP</h5>
+									<div class="card-action">
+										<center>
+											<a href="#!" class="blue-grey-text" v-on:click="addProductoCarrito(producto)">Añadir al carrito</a>
+										</center>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="almuerzos" class="col s12 m12 l9">
+					<div class="aling-right">
+						<div class="col s12 m6 l6 paddingBottom"><a class="waves-effect waves-light btn blue-grey fullWidth" v-on:click="todosf5()">Todos los Fake 5</a></div>
+						<div class="col s12 m6 l6 paddingBottom"><a class="waves-effect waves-light btn blue-grey fullWidth" v-on:click="todosf6()">Todos los Fake 6</a></div>
+						<div class="row">
+							<div class="input-field col s12 m12 l12">
+								<input id="buscarAlmuerzos" type="text" @keyup="buscarAlmuerzos()">
+								<label for="buscarAlmuerzos">Buscar almuerzos</label>
+							</div>
+						</div>
+					</div>
+					<div v-for="producto in productos">
+						<div class="col s12 m4">
+							<div class="card white" >
+								<div class="card-image">
+									<img src="../img/imagen.jpg">
+									<h5 class="card-title">{{ producto.name }}</h5>
+								</div>
+								<div class="card-content">
+									<h6 class="aling-right red-text" v-if="producto.available == false"><i class="material-icons ">close</i><b>No disponible</b></h6>
+									<h6 class="aling-right green-text" v-else><i class="material-icons  ">check</i><b>Disponible</b></h6>
+									<h6 class="aling-right">{{ producto.quantity }} en stock</h6>
+									<h5 class="aling-right blue-grey-text">${{ producto.price }} COP</h5>
+									<div class="card-action">
+										<center>
+											<a href="#!" class="blue-grey-text" v-on:click="addProductoCarrito(producto)">Añadir al carrito</a>
+										</center>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="vinos" class="col s12 m12 l9">
+					<div class="aling-right">
+						<div class="col s12 m6 l6 paddingBottom"><a class="waves-effect waves-light btn blue-grey fullWidth" v-on:click="todosf8()">Todos los Fake 8</a></div>
+						<div class="col s12 m6 l6 paddingBottom"><a class="waves-effect waves-light btn blue-grey fullWidth" v-on:click="todosf9()">Todos los Fake 9</a></div>
+						<div class="row">
+							<div class="input-field col s12 m12 l12">
+								<input id="buscarVinos" type="text" @keyup="buscarVinos()">
+								<label for="buscarVinos">Buscar vinos</label>
+							</div>
+						</div>
+					</div>
+					<div v-for="producto in productos">
+						<div class="col s12 m4">
+							<div class="card white" >
+								<div class="card-image">
+									<img src="../img/imagen.jpg">
+									<h5 class="card-title">{{ producto.name }}</h5>
+								</div>
+								<div class="card-content">
+									<h6 class="aling-right red-text" v-if="producto.available == false"><i class="material-icons ">close</i><b>No disponible</b></h6>
+									<h6 class="aling-right green-text" v-else><i class="material-icons  ">check</i><b>Disponible</b></h6>
+									<h6 class="aling-right">{{ producto.quantity }} en stock</h6>
+									<h5 class="aling-right blue-grey-text">${{ producto.price }} COP</h5>
+									<div class="card-action">
+										<center>
+											<a href="#!" class="blue-grey-text" v-on:click="addProductoCarrito(producto)">Añadir al carrito</a>
+										</center>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script src="../js/vue.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.0/vue-resource.js"></script>
+<script  src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="../js/materialize.js"></script>
+<script type="text/javascript" src="../js/app.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
+</html>

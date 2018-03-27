@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>El baratón - carrito</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/app.css">
+	<link rel="stylesheet" type="text/css" href="../css/materialize.css">
+</head>
+
+<body>
+
+	<div id="app">
+		<div class="navbar-fixed">
+			<nav>
+				<div class="nav-wrapper blue-grey">
+					<a href="#!" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+					<ul>
+						<li><span class="logo"><a href="index.html">El baratón</a></span></li>
+					</ul>
+
+					<ul class="right">
+						<li>
+							<a href="carrito.html" class="aling-right">
+								<i class="material-icons">shopping_cart</i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+
+		<ul id="slide-out" class="sidenav">
+			<ul>
+				<li v-for="categoria in categorias">
+					<a v-if="categoria.name == 'Bebidas'" class="waves-effect waves-light blue-grey white-text" v-on:click="getProductsBebidas()">{{ categoria.name }}</a>
+					<a v-if="categoria.name == 'Desayunos'" class="waves-effect waves-light blue-grey white-text" v-on:click="getProductsDesayunos()">{{ categoria.name }}</a>
+					<a v-if="categoria.name == 'Almuerzos'" class="waves-effect waves-light blue-grey white-text" v-on:click="getProductsAlmuerzos()">{{ categoria.name }}</a>
+					<a v-if="categoria.name == 'Vinos'" class="waves-effect waves-light blue-grey white-text" v-on:click="getProductsVinos()">{{ categoria.name }}</a>
+					<ul >
+						<li v-for="sublevels in categoria.sublevels">
+							<a v-if="sublevels.name == 'Gaseosas'" class=" waves-effect waves-grey padSubLevel" v-on:click="getProductsBebidas()">{{ sublevels.name }}</a>
+							<a v-if="sublevels.name == 'Desayunos'" class=" waves-effect waves-grey padSubLevel" v-on:click="getProductsDesayunos()">{{ sublevels.name }}</a>
+							<a v-if="sublevels.name == 'Fake 5'" class=" waves-effect waves-grey padSubLevel" v-on:click="todosf5()">{{ sublevels.name }}</a>
+							<a v-if="sublevels.name == 'Fake 6'" class=" waves-effect waves-grey padSubLevel" v-on:click="todosf6()">{{ sublevels.name }}</a>
+							<a v-if="sublevels.name == 'Fake 8'" class=" waves-effect waves-grey padSubLevel" v-on:click="todosf8()">{{ sublevels.name }}</a>
+							<a v-if="sublevels.name == 'Fake 9'" class=" waves-effect waves-grey padSubLevel" v-on:click="todosf9()">{{ sublevels.name }}</a>
+							<ul >
+								<li v-for="(sublevelstwo, index) in sublevels.sublevels">
+									<a v-if="sublevelstwo.name == 'Con azúcar'" class=" waves-effect waves-grey padSubLevelTwo" v-on:click="geseosasCon()">{{ sublevelstwo.name }}</a>
+									<a v-if="sublevelstwo.name == 'Sin azúcar'" class=" waves-effect waves-grey padSubLevelTwo" v-on:click="gaseosasSin()">{{ sublevelstwo.name }}</a>
+									<a v-if="sublevelstwo.name == 'Fake 2'" class=" waves-effect waves-grey padSubLevelTwo" v-on:click="f1Conf2()">{{ sublevelstwo.name }}</a>
+									<a v-if="sublevelstwo.name == 'Fake 3'" class=" waves-effect waves-grey padSubLevelTwo" v-on:click="f1Conf3()">{{ sublevelstwo.name }}</a>
+									<ul >
+										<li v-for="sublevelsthree in sublevelstwo.sublevels">
+											<a v-if="sublevelsthree.name == 'Fake 4'" class=" waves-effect waves-grey padSubLevelThree" v-on:click="f1Conf3Masf4()">{{ sublevelsthree.name }}</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</ul>
+		
+		<div class="row" id="bodyCarrito">
+			<div class="col s12 m12 l12">
+				<div class="col s12 m12 l12">
+					<div class="card">
+						<div class="card-content">
+							<h5 class="card-title">Carrito de compras</h5>
+							<table class="centered bordered striped">
+								<thead>
+									<tr>
+										<th>PRODUCTO</th>
+										<th>QUITAR</th>
+										<th>AÑADIR</th>
+										<th>CANTIDAD</th>
+										<th>PRECIO UNITARIO</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="(carritoEach, index) in viewCarrito">
+										<td>{{ carritoEach.name }}</td>
+										<td>  <a class="btn-floating btn waves-effect waves-light red" v-on:click="eliminarProducto(carritoEach.id,index)"><i class="material-icons">remove</i></a></td>
+										<td>  <a class="btn-floating btn waves-effect waves-light green" v-on:click="addProductoCarrito(carritoEach)"><i class="material-icons">add</i></a></td>
+										<td>{{ carritoEach.cant }}</td>
+										<td>${{ carritoEach.price }} COP</td>
+									</tr>
+
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><b>TOTAL</b></td>
+										<td>${{ total }} COP</td>	
+									</tr>
+								</tbody>
+							</table>
+							<br>
+							<div class="col s12 l12 m12 aling-right">
+								<button class="btn green" v-on:click="comprarProductos()">Comprar productos</button>
+							</div>
+							<br>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="modal1" class="modal green white-text">
+				<div class="modal-content marginModal">
+					<center>
+						<div class="col s12 m12 l12">
+							<i class="material-icons iconModal">done</i>
+						</div>
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<label class="labelModal">Compra realizada con éxito</label>
+							</div>
+						</div>
+					</center>
+				</div>
+				<div class="modal-footer green ">
+					<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat white-text">Aceptar</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script src="../js/vue.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.0/vue-resource.js"></script>
+<script  src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="../js/materialize.js"></script>
+<script type="text/javascript" src="../js/app.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
+</html>
